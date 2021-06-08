@@ -1,0 +1,844 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Assets/PlayerDM/WelfzFurs/WelfzArm.png" type="Texture" id=1]
+[ext_resource path="res://Assets/PlayerDM/PlayerDMbase4.png" type="Texture" id=2]
+[ext_resource path="res://Entities/PlayerDM/PlayerDM2.gd" type="Script" id=3]
+[ext_resource path="res://Assets/PlayerDM/inventory3.png" type="Texture" id=4]
+[ext_resource path="res://Assets/PlayerDM/hudunder.png" type="Texture" id=5]
+[ext_resource path="res://Assets/PlayerDM/hudprogress.png" type="Texture" id=6]
+[ext_resource path="res://Assets/PlayerDM/hud2under.png" type="Texture" id=7]
+[ext_resource path="res://Assets/PlayerDM/hud2progress.png" type="Texture" id=8]
+[ext_resource path="res://Entities/PlayerDM/gunposref.gd" type="Script" id=9]
+[ext_resource path="res://Assets/Weapons/shotgun.png" type="Texture" id=10]
+
+[sub_resource type="Animation" id=1]
+resource_name = "duck"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 30, 31, 32 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0, 0.0145786 ),
+"update": 0,
+"values": [ 1.0, 0.01 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:duck")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "duckrun"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 35, 36, 37, 38 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "duckup"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 33, 34 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:duck")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 2, 3, 4, 3, 2, 3, 2, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 21, 22 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 25, 26 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 27, 28 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:land")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer:playback_speed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("KickArea/KickCol:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:kick")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:busy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 3, 2, 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:state")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 45, 46, 47, 48 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("KickArea/KickCol:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:kick")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:busy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 3, 2, 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:state")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 50, 51, 52, 53 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("KickArea/KickCol:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:kick")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 1 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:busy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:state")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 55, 56, 57, 58 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("KickArea/KickCol:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:kick")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:busy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 2, 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:state")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:duck")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 12, 13, 14, 15, 16 ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 6, 7, 8, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:busy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 6, 12.5 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 11.5, 16.5 )
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 24.5, 19.5 )
+
+[node name="PlayerDM" type="KinematicBody2D" groups=[
+"player",
+]]
+collision_layer = 2
+collision_mask = 8
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+kick = 2
+land = 1
+duck = 1
+busy = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/duck = SubResource( 1 )
+anims/duckrun = SubResource( 2 )
+anims/duckup = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/idleBored = SubResource( 5 )
+anims/jump = SubResource( 6 )
+anims/jumpFall = SubResource( 7 )
+anims/jumpland = SubResource( 8 )
+anims/kick1 = SubResource( 9 )
+anims/kick2 = SubResource( 10 )
+anims/kick3 = SubResource( 11 )
+anims/kick4 = SubResource( 12 )
+anims/run = SubResource( 13 )
+anims/taunt = SubResource( 14 )
+
+[node name="Sprite" type="Sprite" parent="." groups=[
+"player",
+]]
+texture = ExtResource( 2 )
+vframes = 10
+hframes = 10
+frame = 30
+
+[node name="SpriteArm" type="Sprite" parent="Sprite" groups=[
+"player",
+]]
+z_index = 2
+texture = ExtResource( 1 )
+vframes = 10
+hframes = 10
+
+[node name="gunposref" type="Sprite" parent="."]
+visible = false
+position = Vector2( 9, 10 )
+z_index = -10
+texture = ExtResource( 10 )
+vframes = 3
+script = ExtResource( 9 )
+
+[node name="ShapeCol" type="CollisionShape2D" parent="."]
+position = Vector2( -1, 7 )
+shape = SubResource( 15 )
+
+[node name="KickArea" type="Area2D" parent="."]
+
+[node name="KickCol" type="CollisionShape2D" parent="KickArea"]
+position = Vector2( 12, 6 )
+shape = SubResource( 16 )
+
+[node name="GrabArea" type="Area2D" parent="."]
+
+[node name="GrabCol" type="CollisionShape2D" parent="GrabArea"]
+position = Vector2( 3, 3 )
+shape = SubResource( 17 )
+disabled = true
+
+[node name="HUD" type="Camera2D" parent="."]
+current = true
+
+[node name="Inventory" type="Sprite" parent="HUD"]
+position = Vector2( 0, -176 )
+texture = ExtResource( 4 )
+
+[node name="label0" type="Label" parent="HUD/Inventory"]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = -228.0
+margin_top = -6.99997
+margin_right = -24.0
+margin_bottom = 7.00003
+text = "Null"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label1" type="Label" parent="HUD/Inventory"]
+modulate = Color( 0, 0, 1, 1 )
+margin_left = 24.0
+margin_top = -6.99997
+margin_right = 269.0
+margin_bottom = 7.00003
+text = "Null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="labelM" type="Label" parent="HUD/Inventory"]
+modulate = Color( 0, 1, 0, 1 )
+margin_left = -144.0
+margin_top = 7.00003
+margin_right = 145.0
+margin_bottom = 21.0
+text = "Null"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="labelHealth" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.0483333
+anchor_right = 0.5
+anchor_bottom = 0.0483333
+margin_left = -290.0
+margin_top = 145.0
+margin_right = -225.0
+margin_bottom = 159.0
+text = "100"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Healthbar" type="TextureProgress" parent="HUD/labelHealth"]
+margin_top = -12.0
+margin_right = 70.0
+margin_bottom = 28.0
+value = 100.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
+fill_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="labelArmour" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.0483333
+anchor_right = 0.5
+anchor_bottom = 0.0483333
+margin_left = -220.0
+margin_top = 145.0
+margin_right = -155.0
+margin_bottom = 159.0
+text = "50"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Armourbar" type="TextureProgress" parent="HUD/labelArmour"]
+margin_top = -12.0
+margin_right = 70.0
+margin_bottom = 28.0
+value = 50.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
+fill_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="labelGun0" type="Label" parent="HUD"]
+modulate = Color( 1, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.0483333
+anchor_right = 0.5
+anchor_bottom = 0.0483333
+margin_left = 154.0
+margin_top = 145.0
+margin_right = 219.0
+margin_bottom = 159.0
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gunbar0" type="TextureProgress" parent="HUD/labelGun0"]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = -5.0
+margin_top = -12.0
+margin_right = 65.0
+margin_bottom = 28.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="labelGun1" type="Label" parent="HUD"]
+modulate = Color( 0, 0, 1, 1 )
+anchor_left = 0.5
+anchor_top = 0.0483333
+anchor_right = 0.5
+anchor_bottom = 0.0483333
+margin_left = 224.0
+margin_top = 145.0
+margin_right = 289.0
+margin_bottom = 159.0
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gunbar1" type="TextureProgress" parent="HUD/labelGun1"]
+modulate = Color( 0, 0, 1, 1 )
+margin_left = -5.0
+margin_top = -12.0
+margin_right = 65.0
+margin_bottom = 28.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="body_entered" from="GrabArea" to="." method="_on_GrabArea_body_entered"]

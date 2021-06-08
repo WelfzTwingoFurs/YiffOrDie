@@ -1,0 +1,173 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Weapons/pistol2.png" type="Texture" id=1]
+[ext_resource path="res://Entities/Weapons/pistol.gd" type="Script" id=3]
+[ext_resource path="res://zOld/PlayerDMarmShot3.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteGun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:spritebusy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "reload"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteGun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteArm:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 20, 27, 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer:playback_speed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:spritebusy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reload"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteGun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_lazer"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer:playback_speed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 7, 4 )
+
+[node name="pistol" type="KinematicBody2D" groups=[
+"pickup",
+"weapon",
+]]
+z_index = -1
+collision_layer = 2147483652
+script = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.5
+anims/idle = SubResource( 1 )
+anims/reload = SubResource( 2 )
+anims/shoot = SubResource( 3 )
+
+[node name="SpriteGun" type="Sprite" parent="."]
+position = Vector2( 16, 2 )
+texture = ExtResource( 1 )
+vframes = 3
+
+[node name="SpriteArm" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0, 1, 1, 1 )
+texture = ExtResource( 4 )
+vframes = 9
+hframes = 10
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+position = Vector2( 14, 2.5 )
+shape = SubResource( 4 )
