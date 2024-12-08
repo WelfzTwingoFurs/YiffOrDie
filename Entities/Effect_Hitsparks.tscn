@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cd2xyaor1cgkh"]
-
-[ext_resource type="Texture2D" uid="uid://c4ckr4e385omv" path="res://Assets/effect_hitspark.png" id="1_ei37g"]
-[ext_resource type="Script" path="res://Entities/Effect_Hitsparks.gd" id="2_ngwti"]
-
-[node name="Effect_Hitsparks" type="Sprite2D"]
-texture = ExtResource("1_ei37g")
-hframes = 2
-script = ExtResource("2_ngwti")
