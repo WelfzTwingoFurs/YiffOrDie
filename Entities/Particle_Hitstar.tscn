@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://eaar782g3qqs"]
+
+[ext_resource type="Script" path="res://Scripts/ParticleGeneric.gd" id="1_cpgtc"]
+[ext_resource type="Texture2D" uid="uid://d2cbj6e1alto4" path="res://Assets/effect_hitstar.png" id="2_sjdyr"]
+
+[node name="Particle" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 16
+script = ExtResource("1_cpgtc")
+gravity = 0
+timer = 20.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_sjdyr")
+hframes = 2

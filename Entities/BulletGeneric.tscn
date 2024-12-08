@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr2h1h8hwa38r"]
+
+[ext_resource type="Script" path="res://Scripts/BulletGeneric.gd" id="1_wh3xm"]
+[ext_resource type="Texture2D" uid="uid://b67fpgowe47uy" path="res://Assets/gun_bullet.png" id="2_vmsem"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fl5yx"]
+size = Vector2(20, 5)
+
+[node name="Bullet" type="CharacterBody2D"]
+z_index = -1
+collision_layer = 8
+script = ExtResource("1_wh3xm")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+texture = ExtResource("2_vmsem")
+
+[node name="Col" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fl5yx")
+
+[node name="Area" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="Col" type="CollisionShape2D" parent="Area"]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_fl5yx")
+
+[connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
