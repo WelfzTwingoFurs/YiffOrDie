@@ -1,0 +1,189 @@
+[gd_scene load_steps=14 format=3 uid="uid://y83qdv83ah7f"]
+
+[ext_resource type="Script" path="res://Entities/GunPistol.gd" id="1_jubkg"]
+[ext_resource type="Texture2D" uid="uid://bvt6tv0e7y26g" path="res://Assets/gun_muzzleflash.png" id="2_mhwma"]
+[ext_resource type="Texture2D" uid="uid://pcm3cm4p8fvs" path="res://Assets/gunpistol.png" id="3_35225"]
+[ext_resource type="Script" path="res://Entities/GunPistol_Audio.gd" id="4_s0a0m"]
+[ext_resource type="AudioStream" uid="uid://ce64yokhq0lnd" path="res://Assets/gunpistol_shoot.wav" id="5_j1llb"]
+[ext_resource type="AudioStream" uid="uid://pkdq5mpoijgm" path="res://Assets/gunpistol_empty.wav" id="6_ddw2l"]
+[ext_resource type="AudioStream" uid="uid://jsl8cc4bps6t" path="res://Assets/gunpistol_release.wav" id="7_s8g1n"]
+[ext_resource type="AudioStream" uid="uid://dtiespdpk4nm8" path="res://Assets/gunpistol_reload.wav" id="8_blhb7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vqo73"]
+
+[sub_resource type="Animation" id="Animation_q1pje"]
+resource_name = "empty"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 1, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sfx")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"empty"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_mcgb2"]
+resource_name = "reload"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.2, 2.5, 2.625, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 2, 4, 2, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flash:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 1.6, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"release"
+}, {
+"args": [],
+"method": &"reload"
+}, {
+"args": [false],
+"method": &"set_busy"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.2, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [1],
+"method": &"set_handstate"
+}, {
+"args": [2],
+"method": &"set_handstate"
+}, {
+"args": [1],
+"method": &"set_handstate"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vtnqj"]
+resource_name = "shoot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 1, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flash:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dgb6m"]
+_data = {
+"empty": SubResource("Animation_q1pje"),
+"reload": SubResource("Animation_mcgb2"),
+"shoot": SubResource("Animation_vtnqj")
+}
+
+[node name="GunPistol" type="CharacterBody2D" groups=["grab"]]
+scale = Vector2(1.05, 1.05)
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_jubkg")
+
+[node name="Col" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vqo73")
+
+[node name="AniPlay" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dgb6m")
+}
+speed_scale = 3.0
+
+[node name="Flash" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(49.9322, -5.70473)
+texture = ExtResource("2_mhwma")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_35225")
+vframes = 5
+
+[node name="Sfx" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("4_s0a0m")
+shoot_sfx = ExtResource("5_j1llb")
+empty_sfx = ExtResource("6_ddw2l")
+release_sfx = ExtResource("7_s8g1n")
+reload_sfx = ExtResource("8_blhb7")

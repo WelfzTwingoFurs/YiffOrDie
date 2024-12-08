@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmymwdtikbksf"]
+
+[ext_resource type="Script" path="res://Scripts/Rebinder.gd" id="1_3n7vj"]
+
+[node name="rebinder" type="Node2D"]
+position = Vector2(269.104, 122.103)
+script = ExtResource("1_3n7vj")
+rebinder = false
