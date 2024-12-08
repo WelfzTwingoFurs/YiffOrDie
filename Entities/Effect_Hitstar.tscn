@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b81hu83f88ii6"]
-
-[ext_resource type="Texture2D" uid="uid://d2cbj6e1alto4" path="res://Assets/effect_hitstar.png" id="1_axywd"]
-[ext_resource type="Script" path="res://Entities/Effect_Hitstar.gd" id="2_03bvr"]
-
-[node name="Effect_Hitstar" type="Sprite2D"]
-texture = ExtResource("1_axywd")
-hframes = 2
-script = ExtResource("2_03bvr")
