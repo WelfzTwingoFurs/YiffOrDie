@@ -1,13 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://y83qdv83ah7f"]
+[gd_scene load_steps=12 format=3 uid="uid://y83qdv83ah7f"]
 
 [ext_resource type="Script" path="res://Entities/GunAutoPistol.gd" id="1_jubkg"]
 [ext_resource type="Texture2D" uid="uid://bvt6tv0e7y26g" path="res://Assets/gun_muzzleflash.png" id="2_mhwma"]
 [ext_resource type="Texture2D" uid="uid://pcm3cm4p8fvs" path="res://Assets/gunpistol.png" id="3_35225"]
 [ext_resource type="Script" path="res://Scripts/GunAudioGeneric.gd" id="4_ox4lf"]
-[ext_resource type="AudioStream" uid="uid://ce64yokhq0lnd" path="res://Assets/gunpistol_shoot.wav" id="5_j1llb"]
 [ext_resource type="AudioStream" uid="uid://pkdq5mpoijgm" path="res://Assets/gunpistol_empty.wav" id="6_ddw2l"]
-[ext_resource type="AudioStream" uid="uid://jsl8cc4bps6t" path="res://Assets/gunpistol_release.wav" id="7_s8g1n"]
-[ext_resource type="AudioStream" uid="uid://dtiespdpk4nm8" path="res://Assets/gunpistol_reload.wav" id="8_blhb7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vqo73"]
 
@@ -191,7 +188,6 @@ _data = {
 [node name="GunAutoPistol" type="CharacterBody2D" groups=["grab"]]
 scale = Vector2(1.05, 1.05)
 collision_layer = 4
-collision_mask = 5
 script = ExtResource("1_jubkg")
 
 [node name="Col" type="CollisionShape2D" parent="."]
@@ -204,6 +200,7 @@ libraries = {
 speed_scale = 3.0
 
 [node name="Flash" type="Sprite2D" parent="."]
+visible = false
 z_index = -2
 position = Vector2(49.9322, -5.70473)
 texture = ExtResource("2_mhwma")
@@ -211,11 +208,18 @@ texture = ExtResource("2_mhwma")
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_35225")
 vframes = 5
-frame = 1
 
 [node name="Sfx" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("4_ox4lf")
-shoot_sfx = ExtResource("5_j1llb")
 empty_sfx = ExtResource("6_ddw2l")
-release_sfx = ExtResource("7_s8g1n")
-reload_sfx = ExtResource("8_blhb7")
+
+[node name="TooClose" type="Area2D" parent="."]
+scale = Vector2(3, 2)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Col" type="CollisionShape2D" parent="TooClose"]
+shape = SubResource("CircleShape2D_vqo73")
+
+[connection signal="body_entered" from="TooClose" to="." method="_on_too_close_body_entered"]
+[connection signal="body_exited" from="TooClose" to="." method="_on_too_close_body_exited"]

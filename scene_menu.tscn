@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt4hccihj2ky"]
+
+[ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_fqrmn"]
+[ext_resource type="Script" path="res://Scripts/RainbowLabel.gd" id="2_3ms3x"]
+[ext_resource type="PackedScene" uid="uid://cmymwdtikbksf" path="res://Entities/rebinder.tscn" id="2_wgkhm"]
+
+[node name="menu" type="Node2D"]
+script = ExtResource("1_fqrmn")
+
+[node name="label" type="Label" parent="."]
+offset_right = 122.0
+offset_bottom = 23.0
+text = "Yiff, ...or DIE! >:3"
+script = ExtResource("2_3ms3x")
+
+[node name="rebinder" parent="." instance=ExtResource("2_wgkhm")]
+visible = false
+modulate = Color(1, 1, 1, 0.498039)
+player = 1

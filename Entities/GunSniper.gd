@@ -5,22 +5,25 @@ extends "res://Scripts/GunGeneric.gd"
 func _ready():
 	start_pos = position
 	projectile = preload("res://Entities/BulletGeneric.tscn")
-	magazine = preload("res://Entities/Particle_Gunclip.tscn")
 	guncase = preload("res://Entities/Particle_Guncase.tscn")
 	
 	
+	name_string = "Sniper Rifle"
 	gravity = 35
+	handstate = 5
 	
-	ammo_in = 3
-	ammo_size = 3
-	ammo_out = 3
-	name_string = "Pistol"
+	ammo_in = 1
+	ammo_size = 1
+	ammo_out = 2
+	
+	auto_shoot = false
+	auto_reload = true
+	auto_refire = false
+	
 	flash_pos = $Flash.position.x
 	$Flash.visible = false
 	
-	auto_shoot = true
-	auto_reload = true
-	auto_refire = false
+
 
 #func set_flash_pos(): flash_pos = $Flash.position.x
 
@@ -42,55 +45,30 @@ func shoot():
 	
 	var instance = projectile.instantiate()
 	
-	instance.damage = 15
-	instance.knockback = Vector2(-250,-250)
-	instance.knock_replace = false
+	instance.damage = 50
+	instance.knockback = Vector2(-1000,0)
+	instance.knock_replace = true
 	instance.stun = 10
-	instance.speed = 3000.0
-	instance.dietime = 20.0
-	instance.gravity = 1.0
+	instance.speed = 10000.0
+	instance.dietime = 50.0
+	instance.gravity = 0.0
 	instance.deaccel = 0.0
-	instance.rotation_degrees = 359 +randi()%6
-	instance.scale = Vector2(0.8,1)
-	instance.facing = holder.facing if holder else facing
-	
-	
+	instance.scale.x = 2
 	
 	if holder:
 		instance.add_collision_exception_with(holder)
-	instance.position = position + Vector2(0,-6 * (-1 if ($Sprite.rotation_degrees >= 180) else 1))
+	
+	instance.facing = (holder.facing if holder else facing)
+	instance.position = position + Vector2(15*(holder.facing if holder else facing),-6 * (-1 if ($Sprite.rotation_degrees >= 180) else 1))
+	
 	get_parent().add_child(instance)
-
-#func shoot():
-	#$Sfx.shoot()
-	#$Flash.flip_v = randi() % 2
-	#
-	#var instance = projectile.instantiate()
-	#
-	#instance.damage = 15
-	#instance.knockback = Vector2(-250,-250)
-	#instance.knock_replace = false
-	#instance.stun = 10
-	#instance.facing = 1
-	#instance.speed = 3000.0
-	#instance.dietime = 20.0
-	#instance.gravity = 1.0
-	#instance.deaccel = 0.0
-	#
-	#instance.facing = holder.facing
-	#instance.position = position + Vector2(0,-6)
-	#instance.add_collision_exception_with(holder)
-	#get_parent().add_child(instance)
-
-
-
 
 
 func release():
 	$Sfx.release()
 	ammo_in = 0
 	
-	var instance = magazine.instantiate()
+	var instance = guncase.instantiate()
 	instance.position = position + Vector2(-12*(holder.facing if holder else facing),0)
 	instance.velocity = velocity
 	get_parent().add_child(instance)
@@ -109,3 +87,12 @@ func set_handstate(valoo): handstate = valoo
 func set_busy(yeah): busy = yeah
 
 
+
+#func _on_too_close_body_exited(body):
+	#if closers.has(body):
+		#closers.erase(body)
+#
+#
+#func _on_too_close_body_entered(body):
+	#if body.is_in_group("player") && !closers.has(body):
+		#closers.push_back(body)
