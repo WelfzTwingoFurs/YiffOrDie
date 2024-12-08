@@ -1,17 +1,18 @@
 extends AudioStreamPlayer2D
-@export var shoot_sfx   = load("res://Assets/gunpistol_shoot.wav")
-@export var empty_sfx   = load("res://Assets/gunpistol_shoot.wav")
-@export var release_sfx = load("res://Assets/gunpistol_release.wav")
-@export var reload_sfx  = load("res://Assets/gunpistol_reload.wav")
-@export var charge_sfx  = load("res://Assets/gunpistol_shoot.wav")
+@export var shoot_sfx   = preload("res://Assets/gunpistol_shoot.wav")
+@export var empty_sfx   = preload("res://Assets/gunpistol_shoot.wav")
+@export var release_sfx = preload("res://Assets/gunpistol_release.wav")
+@export var reload_sfx  = preload("res://Assets/gunpistol_reload.wav")
+@export var charge_sfx  = preload("res://Assets/gunpistol_shoot.wav")
 
 func shoot():
 	set_stream(shoot_sfx)
 	play()
 
 func empty():
-	set_stream(empty_sfx)
-	play()
+	if !playing:
+		set_stream(empty_sfx)
+		play()
 
 func release():
 	set_stream(release_sfx)
