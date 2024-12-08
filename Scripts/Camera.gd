@@ -9,7 +9,7 @@ func _ready():
 func refresh_targets():
 	players = []
 	for target in get_parent().get_children():
-		if target.is_in_group("player"):
+		if target.is_in_group("player") && target.HP > 0:
 			players.append(target)
 	
 	if focus > players.size()-1:
@@ -56,7 +56,9 @@ func _process(_delta):
 			else: 
 				zoom = wow
 			
-		
+		else:
+			refresh_targets()
+			zoom = Vector2(1,1)
 		
 		
 	
